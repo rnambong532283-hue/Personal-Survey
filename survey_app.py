@@ -1219,8 +1219,8 @@ def admin_panel():
                     
                     # Visualizations
                     st.markdown("### 📊 Visualizations")
-                    fig = plot_basic_stats(df_clean)
-                    st.pyplot(fig)
+                    fig = plot_basic_stats(df_clean)  # df_clean is your cleaned dataframe
+                    st.pyplot(fig) 
                     
                     # Interpretation box
                     st.markdown("---")
