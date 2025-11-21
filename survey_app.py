@@ -1,3 +1,18 @@
+# 📚 Step-by-Step Guide: Building a Touchless Satisfaction Survey App in your github
+
+# -*- coding: utf-8 -*-
+# ============================================================================
+# TOUCHLESS SATISFACTION SURVEY - ENHANCED EDUCATIONAL VERSION
+# Features:
+# - Admin panel with password (no default message shown to respondents)
+# - Multiple data cleaning strategies with educational notes
+# - Multiple statistical methods with explanations
+# - Multiple ML models with learning descriptions
+# - Built-in SQLite database
+# - Teachable Machine integration
+# ============================================================================
+
+import streamlit as st
 import pandas as pd
 import numpy as np
 from PIL import Image
@@ -733,11 +748,11 @@ def show_method_info(method_dict, method_key):
     """Display educational information about a method"""
     info = method_dict[method_key]
     with st.expander(f"📚 Learn about {info['name']}", expanded=False):
-        st.markdown(f"**Description:** {info['description']}")
-        st.markdown(f"**{list(info.keys())[3]}:** {list(info.values())[3]}")
-        st.markdown(f"**{list(info.keys())[4]}:** {list(info.values())[4]}")
+        st.markdown(f"*Description:* {info['description']}")
+        st.markdown(f"*{list(info.keys())[3]}:* {list(info.values())[3]}")
+        st.markdown(f"*{list(info.keys())[4]}:* {list(info.values())[4]}")
         if len(info) > 5:
-            st.markdown(f"**{list(info.keys())[5]}:** {list(info.values())[5]}")
+            st.markdown(f"*{list(info.keys())[5]}:* {list(info.values())[5]}")
         if 'example' in info:
             st.info(f"💡 Example: {info['example']}")
 
@@ -1126,11 +1141,11 @@ def admin_panel():
                     col1, col2 = st.columns(2)
                     
                     with col1:
-                        st.markdown("**Before Cleaning**")
+                        st.markdown("*Before Cleaning*")
                         st.dataframe(df[score_cols].describe())
                     
                     with col2:
-                        st.markdown("**After Cleaning**")
+                        st.markdown("*After Cleaning*")
                         st.dataframe(st.session_state.cleaned_df[score_cols].describe())
                     
                     st.markdown("##### Changes Summary")
@@ -1139,7 +1154,7 @@ def admin_panel():
                         after_mean = st.session_state.cleaned_df[col].mean()
                         if pd.notna(before_mean) and pd.notna(after_mean):
                             diff = after_mean - before_mean
-                            st.write(f"**{col}**: {before_mean:.2f} → {after_mean:.2f} (change: {diff:+.2f})")
+                            st.write(f"*{col}*: {before_mean:.2f} → {after_mean:.2f} (change: {diff:+.2f})")
     
     # ========== TAB 4: STATISTICS (ENHANCED) ==========
     with tab4:
@@ -1155,7 +1170,7 @@ def admin_panel():
             if saved_interp:
                 st.success("✅ You have a saved interpretation!")
                 with st.expander("📝 View Your Previous Interpretation", expanded=True):
-                    st.markdown("**Your Saved Analysis:**")
+                    st.markdown("*Your Saved Analysis:*")
                     st.info(saved_interp)
                     col1, col2 = st.columns([1, 4])
                     with col1:
@@ -1209,7 +1224,7 @@ def admin_panel():
                         st.markdown("### 🔔 Normality Tests")
                         for q, result in results['normality'].items():
                             if 'interpretation' in result:
-                                st.write(f"**{q}**: {result['interpretation']}")
+                                st.write(f"*{q}*: {result['interpretation']}")
                     
                     if 'correlation' in methods and 'correlation' in results:
                         st.markdown("### 🔗 Correlation Matrix")
@@ -1311,7 +1326,7 @@ def admin_panel():
                     with st.container():
                         col1, col2 = st.columns([5, 1])
                         with col1:
-                            st.markdown(f"**📝 Saved: {timestamp}**")
+                            st.markdown(f*📝 Saved: {timestamp}**")
                         with col2:
                             if st.button("🗑️ Delete", key=f"del_stat_{idx}"):
                                 conn = sqlite3.connect(DB_FILE)
@@ -1476,7 +1491,7 @@ def admin_panel():
                     with st.container():
                         col1, col2 = st.columns([5, 1])
                         with col1:
-                            st.markdown(f"**🤖 {model_name}** - {timestamp}")
+                            st.markdown(f*🤖 {model_name}** - {timestamp}")
                         with col2:
                             if st.button("🗑️ Delete", key=f"del_ml_{idx}"):
                                 conn = sqlite3.connect(DB_FILE)
@@ -1506,7 +1521,7 @@ def survey_page():
     with st.sidebar:
         st.header("📋 Instructions")
         st.markdown("""
-        **Gesture Guide:**
+       *Gesture Guide:**
         
         ❤️ Heart = Very Satisfied (5)
         👍 Thumbs Up = Satisfied (4)  
@@ -1626,7 +1641,7 @@ def survey_page():
                     st.rerun()
     
     with col2:
-        st.markdown("**Gestures:**")
+        st.markdown("*Gestures:*")
         for g, info in GESTURE_MAP.items():
             st.write(f"{info['emoji']} {info['label']}")
 
@@ -1653,5 +1668,5 @@ def main():
     else:
         admin_panel()
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
