@@ -677,12 +677,36 @@ def train_ml_model(df, model_type='logistic'):
     
     return results
 
-    def plot_basic_stats(df):
+def plot_basic_stats(df):
     """Create basic statistics plots"""
+    import matplotlib.pyplot as plt  # ensure matplotlib is imported
+
+    # Columns to plot
     score_cols = ['q1_score', 'q2_score', 'q3_score', 'q4_score', 'q5_score']
-    
+
+    # Step 1: Replace missing values with 0
+    df_clean = df[score_cols].fillna(0)
+
+    # Step 2: Create 2x2 subplots
     fig, axes = plt.subplots(2, 2, figsize=(12, 10))
     fig.suptitle('Survey Statistics Dashboard', fontsize=14, fontweight='bold')
+
+    # Step 3: Flatten axes array for easy indexing
+    axes = axes.flatten()
+
+    # Step 4: Plot histograms for first 4 questions (adjust if you want all 5)
+    for i, col in enumerate(score_cols[:4]):
+        axes[i].hist(df_clean[col], bins=5, color='skyblue', edgecolor='black')
+        axes[i].set_title(f'{col} Distribution')
+        axes[i].set_xlabel('Score')
+        axes[i].set_ylabel('Frequency')
+
+    # Step 5: Adjust layout
+    plt.tight_layout(rect=[0, 0, 1, 0.96])  # leave space for suptitle
+
+    # Step 6: Return the figure for Streamlit
+    return fig
+
     
     # 1. Average scores
     means = [df[col].mean() for col in score_cols]
