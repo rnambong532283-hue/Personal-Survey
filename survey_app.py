@@ -7,7 +7,7 @@ import json
 import io
 import base64
 import streamlit as st
-
+import matplotlib.pyplot as plt
 
 # Analysis libraries
 try:
