@@ -677,7 +677,7 @@ def train_ml_model(df, model_type='logistic'):
     
     return results
 
-def plot_basic_stats(df):
+    def plot_basic_stats(df):
     """Create basic statistics plots"""
     score_cols = ['q1_score', 'q2_score', 'q3_score', 'q4_score', 'q5_score']
     
@@ -1219,8 +1219,12 @@ def admin_panel():
                     
                     # Visualizations
                     st.markdown("### 📊 Visualizations")
-                    fig = plot_basic_stats(df_clean)  # df_clean is your cleaned dataframe
-                    st.pyplot(fig) 
+                        if not df_clean.empty:
+                            fig = plot_basic_stats(df_clean)
+                            st.pyplot(fig)
+                        else:
+                            st.warning("⚠️ No data available to display visualizations.")
+
                     
                     # Interpretation box
                     st.markdown("---")
