@@ -1241,13 +1241,15 @@ def admin_panel():
                         st.markdown("### 🔗 Correlation Matrix")
                         st.dataframe(results['correlation'].style.background_gradient(cmap='coolwarm', vmin=-1, vmax=1))
                     
-                    # Visualizations
+                   # Visualizations
                     st.markdown("### 📊 Visualizations")
-                        if not df_clean.empty:
-                            fig = plot_basic_stats(df_clean)
-                            st.pyplot(fig)
-                        else:
-                            st.warning("⚠️ No data available to display visualizations.")
+                    
+                    if not df_clean.empty:
+                        fig = plot_basic_stats(df_clean)
+                        st.pyplot(fig)
+                    else:
+                        st.warning("⚠️ No data available to display visualizations.")
+
 
                     
                     # Interpretation box
